@@ -14,32 +14,39 @@ public class Solution {
         int[] nums = {4,5,5,6, 6, 4,4};
         System.out.println(search(nums, 6));
     }
-    public boolean search(int[] nums, int target) {
+    public int search(int[] nums, int target) {
         int lo = 0, hi = nums.length - 1;
         while (lo <= hi) {
-            //处理重复数字
-            while(lo < hi && nums[lo] == nums[lo + 1]) ++lo;
-            while(lo < hi &&nums[hi] == nums[hi - 1]) --hi;
             int mid = lo + (hi - lo) / 2;
             if (nums[mid] == target) {
-                return true;
+                return mid;
             }
-            // 先根据 nums[mid] 与 nums[lo] 的关系判断 mid 是在左段还是右段
-            if (nums[mid] >= nums[lo]) {
-                // 再判断 target 是在 mid 的左边还是右边，从而调整左右边界 lo 和 hi
-                if (target >= nums[lo] && target < nums[mid]) {
-                    hi = mid - 1;
-                } else {
-                    lo = mid + 1;
+
+            // 先根据 nums[0] 与 target 的关系判断目标值是在左半段还是右半段
+            if (target >= nums[0]) {
+                // 目标值在左半段时，若 mid 在右半段，则将 mid 索引的值改成 inf
+                // 查找6
+                // {4,5,6,3, 3, 4,4};
+                // {4, 5, 6, inf, inf, inf, inf}
+                if (nums[mid] < nums[0]) {
+                    nums[mid] = Integer.MAX_VALUE;
                 }
             } else {
-                if (target > nums[mid] && target <= nums[hi]) {
-                    lo = mid + 1;
-                } else {
-                    hi = mid - 1;
+                // 目标值在右半段时，若 mid 在左半段，则将 mid 索引的值改成 -inf
+                // 查找2
+                // {3, 3, 7, 8, 9, 2, 2};
+                // {-inf, -inf, -inf, -inf, 9, 2, 2}
+                if (nums[mid] >= nums[0]) {
+                    nums[mid] = Integer.MIN_VALUE;
                 }
             }
+
+            if (nums[mid] < target) {
+                lo = mid + 1;
+            } else {
+                hi = mid - 1;
+            }
         }
-        return false;
+        return -1;
     }
 }

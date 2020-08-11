@@ -11,14 +11,20 @@ public class Solution {
 
     @Test
     public void test() {
-        int[] nums = {1,3,1,1};
-        System.out.println(search(nums, 3));
+        int[] nums = {1};
+        System.out.println(search(nums, 1));
     }
     public boolean search(int[] nums, int target) {
-        int left = 0, right = nums.length;
-        while (left < right) {
-            int mid = left + (right - left) / 2;
-            if (nums[mid] == target) return true;
+        int lo = 0, hi = nums.length - 1;
+        while (lo <= hi) {
+            //处理重复数字
+            while(lo < hi && nums[lo] == nums[lo + 1]) ++lo;
+            while(lo < hi && nums[hi] == nums[hi - 1]) --hi;
+            int mid = lo + (hi - lo) / 2;
+            if (nums[mid] == target) {
+                return true;
+            }
+
             // 先根据 nums[0] 与 target 的关系判断目标值是在左半段还是右半段
             if (target >= nums[0]) {
                 // 目标值在左半段时，若 mid 在右半段，则将 mid 索引的值改成 inf
@@ -31,8 +37,12 @@ public class Solution {
                     nums[mid] = Integer.MIN_VALUE;
                 }
             }
-            if (nums[mid] < target) left = mid + 1;
-            else right = mid;
+
+            if (nums[mid] < target) {
+                lo = mid + 1;
+            } else {
+                hi = mid - 1;
+            }
         }
         return false;
     }

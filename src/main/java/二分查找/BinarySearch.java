@@ -20,7 +20,7 @@ public class BinarySearch {
     }
 
     /**
-     * 查找等于target元素的位置
+     * 无重复数组中查找等于target元素的位置
      * @param nums
      * @param target
      * @return
