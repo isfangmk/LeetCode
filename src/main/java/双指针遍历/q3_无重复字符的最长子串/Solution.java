@@ -1,5 +1,7 @@
 package 双指针遍历.q3_无重复字符的最长子串;
 
+import org.junit.Test;
+
 import java.util.HashSet;
 
 /**
@@ -7,6 +9,11 @@ import java.util.HashSet;
  * @date 2020/8/10 8:01
  */
 public class Solution {
+
+    @Test
+    public void test() {
+        System.out.println(lengthOfLongestSubstring("22343"));
+    }
     public int lengthOfLongestSubstring(String s) {
         int res = 0, right = 0, left = 0;
         HashSet<Character> set = new HashSet<>();

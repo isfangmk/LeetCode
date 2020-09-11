@@ -1,5 +1,7 @@
 package 二分查找.q153_寻找旋转排序数组中的最小值;
 
+import org.junit.Test;
+
 /**
  * @author fmk
  * @date 2020/8/11 9:29
@@ -8,7 +10,13 @@ package 二分查找.q153_寻找旋转排序数组中的最小值;
  * 1
  */
 public class Solution {
-    // 数组中第一个小于 nums[end] 的数字
+
+
+    @Test
+    public void test() {
+        int[] arr = {3,4,5,1,2};
+        System.out.println(findMin(arr));
+    }
     public int findMin(int[] nums) {
         int l = 0, h = nums.length - 1;
         while (l < h) {

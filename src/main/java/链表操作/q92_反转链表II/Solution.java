@@ -18,8 +18,8 @@ public class Solution {
     @Test
     public void test2() {
         ListNode node = reverseBetween1(ListNodeUtils.arrayToLinkedList(
-                new int[] {3, 5}
-        ), 1, 2);
+                new int[] {1, 2, 3, 4, 5}
+        ), 2, 4);
         ListNodeUtils.print(node);
     }
 
@@ -29,7 +29,7 @@ public class Solution {
         ListNode dummy = new ListNode(-1);
         dummy.next = head;
 
-        // g走到第m个节点的前一个位置位置
+        // g走到第m个节点的前一个位置
         // p走到第m个节点的位置
         ListNode g = dummy;
         ListNode p = g.next;
